@@ -1,8 +1,9 @@
-package me.hyh.f_demos.utils;
+package com.f1reking.v2ex.util;
 
 
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -15,10 +16,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Logger;
 
 /**
  * 文件工具类
- * Created by HuangYH on 2015/7/28.
+ * Created by F1ReKing on 2016/1/2.
  */
 public class FileUtils {
 
@@ -97,7 +99,7 @@ public class FileUtils {
 
     private static void deleteFile(File file) {
         if (!file.exists()) {
-            LogUtils.e("The file to be deleted does not exist! File's path is: " + file.getPath());
+            Log.e("","The file to be deleted does not exist! File's path is: " + file.getPath());
         } else {
             deleteFileRecursively(file);
         }
@@ -111,16 +113,16 @@ public class FileUtils {
                     deleteFileRecursively(item);
                 } else {
                     if (!item.delete()) {
-                        LogUtils.e("Failed in recursively deleting a file, file's path is: " + item.getPath());
+                        L.e("Failed in recursively deleting a file, file's path is: " + item.getPath());
                     }
                 }
             }
 
             if (!file.delete()) {
-                LogUtils.e("Failed in recursively deleting a directory, directories' path is: " + file.getPath());
+                Log.e("","Failed in recursively deleting a directory, directories' path is: " + file.getPath());
             } else {
                 if (!file.delete()) {
-                    LogUtils.e("Failed in deleting this file, its path is: " + file.getPath());
+                    Log.e("","Failed in deleting this file, its path is: " + file.getPath());
                 }
             }
         }

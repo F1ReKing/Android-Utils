@@ -1,5 +1,6 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -113,10 +114,10 @@ public class ImageCompressUtil {
      * @param toPath   要转存的路径
      * @return
      */
-    public static File compressAndCopyImageFile(String fromPath, String toPath,
+    public static File compressAndCopyImageFile(Context context,String fromPath, String toPath,
                                                 int quality) {
-        float width = DisplayUtil.getDisplayMetrics().x * 2 / 3;
-        float heigth = DisplayUtil.getDisplayMetrics().y * 2 / 3;
+        float width = DisplayUtil.getDisplayMetrics(context).x * 2 / 3;
+        float heigth = DisplayUtil.getDisplayMetrics(context).y * 2 / 3;
         Bitmap bitmap = getBitmapFromPath(fromPath, width, heigth);
         // Bitmap bitmap = BitmapFactory.decodeFile(fromPath);
         // Bitmap bitmap = getCompressBitmapBySampleSize(fromPath, 2);

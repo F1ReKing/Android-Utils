@@ -1,23 +1,21 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.MeasureSpec;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.yuexunit.fingerfinance.app.AppApplication;
-
 
 /**
  * 屏幕密度、大小等相关函数类
- * Created by HuangYH on 2015/9/1.
+ * Created by F1ReKing on 2016/1/2.
  */
 public class DisplayUtil {
 
@@ -66,9 +64,9 @@ public class DisplayUtil {
      *
      * @return
      */
-    public static Point getDisplayMetrics() {
+    public static Point getDisplayMetrics(Context context) {
         DisplayMetrics dm = new DisplayMetrics();
-        dm = AppApplication.context.getResources().getDisplayMetrics();
+        dm = context.getResources().getDisplayMetrics();
         int screenWidth = dm.widthPixels;
         int screenHeight = dm.heightPixels;
         return new Point(screenWidth, screenHeight);
@@ -107,7 +105,7 @@ public class DisplayUtil {
                 view.measure(0, 0);
                 totalHeight += view.getMeasuredHeight();
             }
-            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) lv
+            LayoutParams params = (LayoutParams) lv
                     .getLayoutParams();
             params.height = totalHeight
                     + (lv.getDividerHeight() * (adapter.getCount() - 1));
@@ -118,25 +116,27 @@ public class DisplayUtil {
     /**
      * ListView中子ListView的高度
      */
-    public static void setListViewHeightBasedOnChildren(ListView listView){
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null){
+        if (listAdapter == null) {
             return;
         }
 
         int totalHeight = 0;
-        for (int i =0; i<listAdapter.getCount();i++){
-            View listItem = listAdapter.getView(i,null,listView);
-            listItem.measure(0,0);
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
             totalHeight += listItem.getMeasuredHeight();
         }
 
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight+(listView.getDividerHeight()*(listAdapter.getCount() - 1));
+        LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
 
-    /** 测量ExpandableListView在scrollview高度 */
+    /**
+     * 测量ExpandableListView在scrollview高度
+     */
     public static void setListViewHeightBasedOnChildren(ExpandableListView listView) {
         //获取ListView对应的Adapter
         ListAdapter listAdapter = listView.getAdapter();
@@ -152,7 +152,7 @@ public class DisplayUtil {
             totalHeight += listItem.getMeasuredHeight();  //统计所有子项的总高度
         }
 
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         //listView.getDividerHeight()获取子项间分隔符占用的高度
         //params.height最后得到整个ListView完整显示需要的高度

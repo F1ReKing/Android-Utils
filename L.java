@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.util.Log;
 
@@ -6,7 +6,7 @@ import android.util.Log;
 /**
  * LogUtils工具类
  *
- * Created by HuangYH on 2015/8/7.
+ * Created by F1ReKing on 2016/1/2.
  *
  * <p>
  * 工具说明：
@@ -17,9 +17,9 @@ import android.util.Log;
  */
 public class L {
 
-    public static boolean DEBUG = true; // 发布产品时改为false
+    public static boolean DEBUG = true; //Todo 发布产品时改为false
 
-    public static final String DEFAULT_TAG = "hyh";
+    public static final String DEFAULT_TAG = "Fk";
 
     public static void openDebug() {
         DEBUG = true;

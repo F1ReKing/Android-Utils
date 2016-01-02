@@ -1,11 +1,12 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.text.Selection;
 import android.text.Spannable;
 import android.widget.EditText;
 
 /**
- * Created by HuangYH on 2015/8/31.
+ * 控件辅助工具类
+ * Created by F1ReKing on 2016/1/2.
  */
 public class widgetUtil {
 

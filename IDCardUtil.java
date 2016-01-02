@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +9,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Created by F1ReKing on 2016/1/2.
+ */
 public class IDCardUtil {
 	/*********************************** 身份证验证开始 ****************************************/
 	/**

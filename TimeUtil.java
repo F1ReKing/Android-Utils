@@ -1,4 +1,4 @@
-package me.hyh.f_demos.utils;
+package com.f1reking.v2ex.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,9 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 时间工具类
- * Created by HuangYH on 2015/7/28.
+ * Created by F1ReKing on 2016/1/2.
  */
-public class TimeUtils {
+public class TimeUtil {
 
     public static String format(String pattern,long milliseconds){
         return (new SimpleDateFormat(pattern)).format(new Date(milliseconds));

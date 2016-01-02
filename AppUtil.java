@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -27,9 +27,9 @@ import java.util.regex.Pattern;
 import javax.security.auth.x500.X500Principal;
 
 /**
- * APP工具类
+ * APP辅助工具类
  * APP相关信息工具类。获取版本信息
- * Created by HuangYH on 2015/9/20.
+ * Created by F1ReKing on 2016/1/2.
  */
 public class AppUtil {
     private static final boolean DEBUG = true;

@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,9 +8,9 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * Created by HuangYH on 2015/9/20.
+ * Created by F1ReKing on 2016/1/2.
  */
-public class SPUtils {
+public class SPUtil {
     /**
      * 保存在手机里面的文件名
      */

@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,7 +6,7 @@ import android.graphics.Color;
 import java.util.regex.Pattern;
 
 /**
- * Created by HuangYH on 2015/12/24.
+ *Created by F1ReKing on 2016/1/2.
  * 颜色转换工具类
  */
 public class ColorUtil {

@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -11,9 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-/**SD卡相关的辅助类
- *
- * Created by HuangYH on 2015/9/20.
+/**
+ * SD卡相关的辅助类
+ * Created by F1ReKing on 2016/1/2.
  */
 public class SDCardUtil {
 
@@ -51,6 +51,7 @@ public class SDCardUtil {
 
     /**
      * 获取空闲内存容量
+     *
      * @param context
      * @return
      */
@@ -129,20 +130,21 @@ public class SDCardUtil {
 
     /**
      * 得到路径
+     *
      * @param context
      * @return
      */
     public static String getRootPath(Context context) {
-        if(context == null) {
+        if (context == null) {
             return null;
         } else {
             try {
-                File e = context.getExternalFilesDir((String)null);
-                if(e == null) {
+                File e = context.getExternalFilesDir((String) null);
+                if (e == null) {
                     e = context.getFilesDir();
                 }
 
-                return e == null?null:e.getAbsolutePath();
+                return e == null ? null : e.getAbsolutePath();
             } catch (Exception var2) {
                 var2.printStackTrace();
                 return null;
@@ -332,17 +334,18 @@ public class SDCardUtil {
 
     /**
      * 得到文件路径
+     *
      * @param context
      * @param uri
      * @return
      */
     public static String getPath(Context context, Uri uri) {
         if ("content".equalsIgnoreCase(uri.getScheme())) {
-            String[] projection = { "_data" };
+            String[] projection = {"_data"};
             Cursor cursor = null;
 
             try {
-                cursor = context.getContentResolver().query(uri, projection,null, null, null);
+                cursor = context.getContentResolver().query(uri, projection, null, null, null);
                 int column_index = cursor.getColumnIndexOrThrow("_data");
                 if (cursor.moveToFirst()) {
                     return cursor.getString(column_index);
@@ -350,8 +353,7 @@ public class SDCardUtil {
             } catch (Exception e) {
                 // Eat it
             }
-        }
-        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
         }
 

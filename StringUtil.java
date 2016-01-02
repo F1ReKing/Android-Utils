@@ -1,11 +1,12 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.text.TextUtils;
 
 import java.util.Locale;
 
 /**
- * Created by HuangYH on 2015/9/21.
+ * 字符串辅助工具类
+ * Created by F1ReKing on 2016/1/2.
  */
 public final class StringUtil {
     /**

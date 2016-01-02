@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,8 +13,6 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import com.yuexunit.fingerfinance.R;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,10 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author HuangYH
- * @ClassName: ProjectUtil
- * @Description:
- * @date 2015年8月24日 下午3:46:42
+ * Created by F1ReKing on 2016/1/2.
  */
 public class ProjectUtil {
 
@@ -90,7 +85,7 @@ public class ProjectUtil {
     public static File getPhotoDir(Context context) {
         String path = SDCardUtil.getRootPath(context);
         if (path == null) {
-            ToastUtil.showToast(R.string.store_error + "", 0);
+            ToastUtil.showToast(context, "无存储设备", 0);
             return null;
         }
         path = path + File.separator + "photo" + File.separator;
@@ -98,7 +93,7 @@ public class ProjectUtil {
         if (!dir.exists())
             dir.mkdirs();
         if (!dir.exists()) {
-            ToastUtil.showToast(R.string.createflie_error + "", 0);
+            ToastUtil.showToast(context, "无法创建文件", 0);
             return null;
         }
         return dir;

@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.content.Context;
 import android.os.Environment;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 /**
  * 本应用数据清除管理器
  * 主要功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录
- * Created by HuangYH on 2015/9/21.
+ * Created by F1ReKing on 2016/1/2.
  */
 public class DataCleanManager {
 

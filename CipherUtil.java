@@ -1,4 +1,4 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
@@ -11,7 +11,7 @@ import javax.crypto.spec.DESKeySpec;
 
 /**
  * MD5工具类
- * Created by HuangYH on 2015/9/21.
+ * Created by F1ReKing on 2016/1/2.
  */
 public class CipherUtil {
 

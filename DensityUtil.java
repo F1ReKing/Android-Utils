@@ -1,11 +1,11 @@
-package com.yuexunit.fingerfinance.util;
+package com.f1reking.v2ex.util;
 
 import android.content.Context;
 import android.util.TypedValue;
 
 /**
  * 常用单位转换的辅助类
- * Created by HuangYH on 2015/9/20.
+ * Created by F1ReKing on 2016/1/2.
  */
 public class DensityUtil {
     private DensityUtil()
