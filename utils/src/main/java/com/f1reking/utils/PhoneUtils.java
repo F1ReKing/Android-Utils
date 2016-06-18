@@ -62,8 +62,8 @@ public class PhoneUtils {
 
     /**
      * 唤醒屏幕并解锁
-     * <uses-permission android:name="android.permission.WAKE_LOCK" />
-     * <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+     * uses-permission android:name="android.permission.WAKE_LOCK"
+     * uses-permission android:name="android.permission.DISABLE_KEYGUARD"
      */
     public static void wakeUpAndUnlock(Context context) {
         KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
@@ -120,10 +120,5 @@ public class PhoneUtils {
                 Pattern.compile("^((13[0-9])|(14[5,7])|(15[0-3,5-8])|(17[0,3,5-8])|(18[0-9])|(147))\\d{8}$");
         }
         return mobilePattern.matcher(mobileNo).matches();
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(isMobileNum("15659292671") + "");
     }
 }

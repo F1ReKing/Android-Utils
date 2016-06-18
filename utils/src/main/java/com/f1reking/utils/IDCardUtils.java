@@ -202,7 +202,6 @@ public class IDCardUtils {
 
 	/**
 	 * @param args
-	 * @throws ParseException
 	 */
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {

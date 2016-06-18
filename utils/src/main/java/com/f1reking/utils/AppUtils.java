@@ -141,7 +141,7 @@ public class AppUtils {
 
     /**
      * 判断当前App是否在后台
-     * <uses-permission android:name="android.permission.GET_TASKS" />
+     * uses-permission android:name="android.permission.GET_TASKS"
      * @param context
      * @return
      */
@@ -206,15 +206,15 @@ public class AppUtils {
      *
      * @param context     上下文
      * @param processName 进程名
-     * @return <ul>
+     * @return
      * return whether this process is named with processName
-     * <li>if context is null, return false</li>
-     * <li>if {@link ActivityManager#getRunningAppProcesses()} is null,
-     * return false</li>
-     * <li>if one process of
+     * if context is null, return false
+     * f {@link ActivityManager#getRunningAppProcesses()} is null,
+     * return false
+     * if one process of
      * {@link ActivityManager#getRunningAppProcesses()} is equal to
-     * processName, return true, otherwise return false</li>
-     * </ul>
+     * processName, return true, otherwise return false
+     *
      */
     public static boolean isNamedProcess(Context context, String processName) {
         if (context == null || TextUtils.isEmpty(processName)) {
