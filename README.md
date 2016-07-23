@@ -1,6 +1,6 @@
 # Android-Utils
 
-[![](https://jitpack.io/v/F1ReKing/SimpleAdapter.svg)](https://jitpack.io/#F1ReKing/SimpleAdapter)
+[![](https://jitpack.io/v/F1ReKing/Android-Utils.svg)](https://jitpack.io/#F1ReKing/Android-Utils)
 
 #### Step 1. Add the JitPack repository to your build file
 ```
