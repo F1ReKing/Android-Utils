@@ -79,15 +79,14 @@ public class AppUtils {
      * 安装apk
      *
      * @param context 上下文
-     * @param file    APK文件
+     * @param file APK文件
      */
     public static void installApk(Context context, File file) {
         Intent intent = new Intent();
         intent.setAction("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.setType("application/vnd.android.package-archive");
-        intent.setDataAndType(Uri.fromFile(file),
-                "application/vnd.android.package-archive");
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         context.startActivity(intent);
     }
 
@@ -95,7 +94,7 @@ public class AppUtils {
      * 安装apk
      *
      * @param context 上下文
-     * @param file    APK文件uri
+     * @param file APK文件uri
      */
     public static void installApk(Context context, Uri file) {
         Intent intent = new Intent();
@@ -108,7 +107,7 @@ public class AppUtils {
     /**
      * 卸载apk
      *
-     * @param context     上下文
+     * @param context 上下文
      * @param packageName 包名
      */
     public static void uninstallApk(Context context, String packageName) {
@@ -121,16 +120,14 @@ public class AppUtils {
     /**
      * 检测服务是否运行
      *
-     * @param context   上下文
+     * @param context 上下文
      * @param className 类名
      * @return 是否运行的状态
      */
     public static boolean isServiceRunning(Context context, String className) {
         boolean isRunning = false;
-        ActivityManager activityManager = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> servicesList = activityManager
-                .getRunningServices(Integer.MAX_VALUE);
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> servicesList = activityManager.getRunningServices(Integer.MAX_VALUE);
         for (ActivityManager.RunningServiceInfo si : servicesList) {
             if (className.equals(si.service.getClassName())) {
                 isRunning = true;
@@ -142,15 +139,13 @@ public class AppUtils {
     /**
      * 判断当前App是否在后台
      * uses-permission android:name="android.permission.GET_TASKS"
-     * @param context
-     * @return
      */
-    public static boolean isAppBackground(final Context context){
+    public static boolean isAppBackground(final Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
-        if (!tasks.isEmpty()){
+        if (!tasks.isEmpty()) {
             ComponentName topActivity = tasks.get(0).topActivity;
-            if (!topActivity.getPackageName().equals(context.getPackageName())){
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
                 return true;
             }
         }
@@ -160,7 +155,7 @@ public class AppUtils {
     /**
      * 停止运行服务
      *
-     * @param context   上下文
+     * @param context 上下文
      * @param className 类名
      * @return 是否执行成功
      */
@@ -187,8 +182,7 @@ public class AppUtils {
         try {
             File dir = new File("/sys/devices/system/cpu/");
             File[] files = dir.listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File pathname) {
+                @Override public boolean accept(File pathname) {
                     if (Pattern.matches("cpu[0-9]", pathname.getName())) {
                         return true;
                     }
@@ -204,17 +198,15 @@ public class AppUtils {
     /**
      * whether this process is named with processName
      *
-     * @param context     上下文
+     * @param context 上下文
      * @param processName 进程名
-     * @return
-     * return whether this process is named with processName
+     * @return return whether this process is named with processName
      * if context is null, return false
      * f {@link ActivityManager#getRunningAppProcesses()} is null,
      * return false
      * if one process of
      * {@link ActivityManager#getRunningAppProcesses()} is equal to
      * processName, return true, otherwise return false
-     *
      */
     public static boolean isNamedProcess(Context context, String processName) {
         if (context == null || TextUtils.isEmpty(processName)) {
@@ -222,18 +214,14 @@ public class AppUtils {
         }
 
         int pid = android.os.Process.myPid();
-        ActivityManager manager = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> processInfoList = manager
-                .getRunningAppProcesses();
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> processInfoList = manager.getRunningAppProcesses();
         if (processInfoList == null) {
             return true;
         }
 
-        for (ActivityManager.RunningAppProcessInfo processInfo : manager
-                .getRunningAppProcesses()) {
-            if (processInfo.pid == pid
-                    && processName.equalsIgnoreCase(processInfo.processName)) {
+        for (ActivityManager.RunningAppProcessInfo processInfo : manager.getRunningAppProcesses()) {
+            if (processInfo.pid == pid && processName.equalsIgnoreCase(processInfo.processName)) {
                 return true;
             }
         }
@@ -251,14 +239,11 @@ public class AppUtils {
      * false
      */
     public static boolean isApplicationInBackground(Context context) {
-        ActivityManager am = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> taskList = am.getRunningTasks(1);
         if (taskList != null && !taskList.isEmpty()) {
             ComponentName topActivity = taskList.get(0).topActivity;
-            if (topActivity != null
-                    && !topActivity.getPackageName().equals(
-                    context.getPackageName())) {
+            if (topActivity != null && !topActivity.getPackageName().equals(context.getPackageName())) {
                 return true;
             }
         }
@@ -273,8 +258,7 @@ public class AppUtils {
      */
     public static String getSign(Context context, String pkgName) {
         try {
-            PackageInfo pis = context.getPackageManager().getPackageInfo(
-                    pkgName, PackageManager.GET_SIGNATURES);
+            PackageInfo pis = context.getPackageManager().getPackageInfo(pkgName, PackageManager.GET_SIGNATURES);
             return hexdigest(pis.signatures[0].toByteArray());
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -289,8 +273,9 @@ public class AppUtils {
      * @return 32位签名字符串
      */
     private static String hexdigest(byte[] paramArrayOfByte) {
-        final char[] hexDigits = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97,
-                98, 99, 100, 101, 102};
+        final char[] hexDigits = {
+            48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102
+        };
         try {
             MessageDigest localMessageDigest = MessageDigest.getInstance("MD5");
             localMessageDigest.update(paramArrayOfByte);
@@ -319,14 +304,12 @@ public class AppUtils {
     public static int gc(Context context) {
         long i = getDeviceUsableMemory(context);
         int count = 0; // 清理掉的进程数
-        ActivityManager am = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         // 获取正在运行的service列表
         List<ActivityManager.RunningServiceInfo> serviceList = am.getRunningServices(100);
-        if (serviceList != null)
+        if (serviceList != null) {
             for (ActivityManager.RunningServiceInfo service : serviceList) {
-                if (service.pid == android.os.Process.myPid())
-                    continue;
+                if (service.pid == android.os.Process.myPid()) continue;
                 try {
                     android.os.Process.killProcess(service.pid);
                     count++;
@@ -334,10 +317,11 @@ public class AppUtils {
                     e.getStackTrace();
                 }
             }
+        }
 
         // 获取正在运行的进程列表
         List<ActivityManager.RunningAppProcessInfo> processList = am.getRunningAppProcesses();
-        if (processList != null)
+        if (processList != null) {
             for (ActivityManager.RunningAppProcessInfo process : processList) {
                 // 一般数值大于RunningAppProcessInfo.IMPORTANCE_SERVICE的进程都长时间没用或者空进程了
                 // 一般数值大于RunningAppProcessInfo.IMPORTANCE_VISIBLE的进程都是非可见进程，也就是在后台运行着
@@ -357,6 +341,7 @@ public class AppUtils {
                     }
                 }
             }
+        }
         if (DEBUG) {
             Log.d(TAG, "清理了" + (getDeviceUsableMemory(context) - i) + "M内存");
         }
@@ -370,8 +355,7 @@ public class AppUtils {
      * @return 当前内存大小
      */
     public static int getDeviceUsableMemory(Context context) {
-        ActivityManager am = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         am.getMemoryInfo(mi);
         // 返回当前系统的可用内存
@@ -436,14 +420,12 @@ public class AppUtils {
         try {
             Class<?> systemProperties = Class.forName("android.os.SystemProperties");
             try {
-                Method get = systemProperties.getMethod("get",
-                        String.class, String.class);
+                Method get = systemProperties.getMethod("get", String.class, String.class);
                 if (get == null) {
                     return "WTF?!";
                 }
                 try {
-                    final String value = (String) get.invoke(
-                            systemProperties, "persist.sys.dalvik.vm.lib",
+                    final String value = (String) get.invoke(systemProperties, "persist.sys.dalvik.vm.lib",
                         /* Assuming default is */"Dalvik");
                     if ("libdvm.so".equals(value)) {
                         return "Dalvik";
@@ -469,32 +451,25 @@ public class AppUtils {
         }
     }
 
-    private final static X500Principal DEBUG_DN = new X500Principal(
-            "CN=Android Debug,O=Android,C=US");
+    private final static X500Principal DEBUG_DN = new X500Principal("CN=Android Debug,O=Android,C=US");
 
     /**
      * 检测当前应用是否是Debug版本
-     *
-     * @param context
-     * @return
      */
     public static boolean isDebuggable(Context context) {
         boolean debuggable = false;
         try {
-            PackageInfo pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+            PackageInfo pinfo =
+                context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
             Signature signatures[] = pinfo.signatures;
-            for (int i = 0; i < signatures.length; i++) {
+            for (Signature signature : signatures) {
                 CertificateFactory cf = CertificateFactory.getInstance("X.509");
-                ByteArrayInputStream stream = new ByteArrayInputStream(signatures[i].toByteArray());
-                X509Certificate cert = (X509Certificate) cf
-                        .generateCertificate(stream);
+                ByteArrayInputStream stream = new ByteArrayInputStream(signature.toByteArray());
+                X509Certificate cert = (X509Certificate) cf.generateCertificate(stream);
                 debuggable = cert.getSubjectX500Principal().equals(DEBUG_DN);
-                if (debuggable)
-                    break;
+                if (debuggable) break;
             }
-
-        } catch (PackageManager.NameNotFoundException e) {
-        } catch (CertificateException e) {
+        } catch (PackageManager.NameNotFoundException | CertificateException ignored) {
         }
         return debuggable;
     }
