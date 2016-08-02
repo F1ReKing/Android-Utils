@@ -15,6 +15,6 @@
 #### Step 2. Add the dependency
 ```
 	dependencies {
-	       compile 'com.github.F1ReKing:Android-Utils:v0.1'
+	       compile 'com.github.F1ReKing:Android-Utils:{lastest-version}'
 	}
 ```
