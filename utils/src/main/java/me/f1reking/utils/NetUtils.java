@@ -29,32 +29,36 @@ public class NetUtils {
         // 判别网络是否连接
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         int NET_TYPE = tm.getNetworkType();
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context
-                .CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager =
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo wifiNetWorkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo mobileNetWorkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
         if (wifiNetWorkInfo != null && wifiNetWorkInfo.isAvailable()) {
-            if (wifiNetWorkInfo.isConnected()) return true;// "wifi true";
-            else return false;// "wifi false";
-
+            if (wifiNetWorkInfo.isConnected()) {
+                return true;// "wifi true";
+            } else {
+                return false;// "wifi false";
+            }
         } else if (mobileNetWorkInfo != null && mobileNetWorkInfo.isAvailable()) {
-            if (mobileNetWorkInfo.isConnected()) return true;// return "mobile true";
-            else return false;// return "mobile false";
-        } else return false;// return "null";
+            if (mobileNetWorkInfo.isConnected()) {
+                return true;// return "mobile true";
+            } else {
+                return false;// return "mobile false";
+            }
+        } else {
+            return false;// return "null";
+        }
     }
 
     /**
      * 判断网络是否连接
-     *
-     * @param context
-     * @return
      */
     public static boolean isOnline(Context context) {
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context
-                .CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager =
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = connectivityManager.getActiveNetworkInfo();
         if (null != info && info.isConnected()) {
             return true;
@@ -66,8 +70,8 @@ public class NetUtils {
      * 判断是否是wifi连接
      */
     public static boolean isWifi(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context
-                .CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager =
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiNetworkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         if (wifiNetworkInfo.isConnected()) {
             return true;
@@ -88,12 +92,10 @@ public class NetUtils {
 
     /**
      * 判断手机链接的网络类型
-     * @param context
-     * @return
      */
-    public static int getNetWorkCLass(Context context){
+    public static int getNetWorkCLass(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        switch (telephonyManager.getNetworkType()){
+        switch (telephonyManager.getNetworkType()) {
             case TelephonyManager.NETWORK_TYPE_GPRS:
             case TelephonyManager.NETWORK_TYPE_EDGE:
             case TelephonyManager.NETWORK_TYPE_CDMA:
@@ -122,24 +124,21 @@ public class NetUtils {
 
     /**
      * 判断当前手机的网络类型（wifi或者2G,3G,4G）
-     * @param context
-     * @return
      */
-    public static int getNetWorkStatus(Context context){
+    public static int getNetWorkStatus(Context context) {
         int netWorkType = NETWORK_CLASS_UNKOWN;
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager =
+            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo!=null && networkInfo.isConnected()){
+        if (networkInfo != null && networkInfo.isConnected()) {
             int type = networkInfo.getType();
 
-            if (type == ConnectivityManager.TYPE_WIFI){
+            if (type == ConnectivityManager.TYPE_WIFI) {
                 netWorkType = NETWORK_WIFI;
-            }else if (type == ConnectivityManager.TYPE_MOBILE){
+            } else if (type == ConnectivityManager.TYPE_MOBILE) {
                 netWorkType = getNetWorkCLass(context);
             }
         }
         return netWorkType;
     }
-
-
 }

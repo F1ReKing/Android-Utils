@@ -18,7 +18,7 @@ public class AppManager {
     public AppManager() {
     }
 
-    public static AppManager getInstance(){
+    public static AppManager getInstance() {
         if (null == instance) {
             instance = new AppManager();
         }
@@ -28,7 +28,7 @@ public class AppManager {
     /**
      * 添加Activity到堆栈
      */
-    public void addActivity(Activity activity){
+    public void addActivity(Activity activity) {
         if (null == activityStack) {
             activityStack = new Stack<>();
         }
@@ -38,7 +38,7 @@ public class AppManager {
     /**
      * 获取当前Activity（即堆栈中最后一个压入的）
      */
-    public Activity currentActivity(){
+    public Activity currentActivity() {
         Activity activity = activityStack.lastElement();
         return activity;
     }
@@ -46,16 +46,17 @@ public class AppManager {
     /**
      * 结束当前Activity（即堆栈中最后一个压入的）
      */
-    public void finishActivity(){
+    public void finishActivity() {
         Activity activity = activityStack.lastElement();
         finishActivity(activity);
     }
 
     /**
      * 结束指定的Activity
+     *
      * @param activity activity
      */
-    public void finishActivity(Activity activity){
+    public void finishActivity(Activity activity) {
         if (activity != null) {
             activityStack.remove(activity);
             activity.finish();
@@ -66,9 +67,9 @@ public class AppManager {
     /**
      * 结束指定类名的Activity
      */
-    public void finishActivity(Class<?> cls){
+    public void finishActivity(Class<?> cls) {
         for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)){
+            if (activity.getClass().equals(cls)) {
                 finishActivity(activity);
             }
         }
@@ -77,7 +78,7 @@ public class AppManager {
     /**
      * 结束所有Activity
      */
-    public void finishAllActivity(){
+    public void finishAllActivity() {
         for (int i = 0; i < activityStack.size(); i++) {
             if (activityStack.get(i) != null) {
                 activityStack.get(i).finish();
@@ -88,17 +89,15 @@ public class AppManager {
 
     /**
      * 退出应用程序
-     * @param context
      */
-    public void AppExit(Context context){
+    public void AppExit(Context context) {
         try {
             finishActivity();
             ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             activityManager.killBackgroundProcesses(context.getPackageName());
             System.exit(0);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

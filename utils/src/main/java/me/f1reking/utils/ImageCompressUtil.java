@@ -23,13 +23,9 @@ public class ImageCompressUtil {
     /**
      * 按指定的长边缩放，并根据照片中相机的方向信息调整图片方向
      *
-     * @param srcPath      图片的完整路径
-     * @param targetWidth
-     * @param targetHeight
-     * @return
+     * @param srcPath 图片的完整路径
      */
-    public static Bitmap getBitmapFromPath(String srcPath, float targetWidth,
-                                           float targetHeight) {
+    public static Bitmap getBitmapFromPath(String srcPath, float targetWidth, float targetHeight) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         // 开始读入图片，此时把options.inJustDecodeBounds 设回true了
         opts.inJustDecodeBounds = true;
@@ -62,8 +58,7 @@ public class ImageCompressUtil {
         try {
             exif = new ExifInterface(srcPath);
             if (exif != null) { // 读取图片中相机方向信息
-                int ori = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-                        ExifInterface.ORIENTATION_NORMAL);
+                int ori = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
                 int digree = 0;
                 switch (ori) {
                     case ExifInterface.ORIENTATION_ROTATE_90:
@@ -79,8 +74,7 @@ public class ImageCompressUtil {
                 if (digree != 0) {
                     Matrix m = new Matrix();
                     m.postRotate(digree);
-                    newBitmap = Bitmap.createBitmap(bitmap, 0, 0,
-                            bitmap.getWidth(), bitmap.getHeight(), m, true);
+                    newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
                     if (newBitmap != bitmap) {
                         bitmap.recycle();
                     }
@@ -98,8 +92,7 @@ public class ImageCompressUtil {
         int height = bmp.getHeight();
         Matrix m = new Matrix();
         m.postRotate(degree);
-        Bitmap newBitmap = Bitmap.createBitmap(bmp, 0, 0, width, height, m,
-                true);
+        Bitmap newBitmap = Bitmap.createBitmap(bmp, 0, 0, width, height, m, true);
         if (newBitmap != bmp) {
             bmp.recycle();
             return newBitmap;
@@ -111,11 +104,9 @@ public class ImageCompressUtil {
      * 按质量压缩图片，并把文件从临时文件夹转存到指定文件夹中
      *
      * @param fromPath 图片完整路径
-     * @param toPath   要转存的路径
-     * @return
+     * @param toPath 要转存的路径
      */
-    public static File compressAndCopyImageFile(Context context,String fromPath, String toPath,
-                                                int quality) {
+    public static File compressAndCopyImageFile(Context context, String fromPath, String toPath, int quality) {
         float width = DisplayUtils.getDisplayMetrics(context).x * 2 / 3;
         float heigth = DisplayUtils.getDisplayMetrics(context).y * 2 / 3;
         Bitmap bitmap = getBitmapFromPath(fromPath, width, heigth);
@@ -177,9 +168,7 @@ public class ImageCompressUtil {
     /**
      * 将Bitmap图像转存到文件上
      *
-     * @param bitmap
      * @param fullFileName 完整的文件名
-     * @return
      */
     public static File convertBmpToFile(Bitmap bitmap, String fullFileName) {
         File file = new File(fullFileName);
@@ -208,13 +197,8 @@ public class ImageCompressUtil {
 
     /**
      * 通过压缩图片的像素来控制内存中Bitmap的大小
-     *
-     * @param imagePath
-     * @param inSampleSize
-     * @return
      */
-    public static Bitmap getCompressBitmapBySampleSize(String imagePath,
-                                                       int inSampleSize) {
+    public static Bitmap getCompressBitmapBySampleSize(String imagePath, int inSampleSize) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         // 开始读入图片，此时把options.inJustDecodeBounds 设回true了
         options.inJustDecodeBounds = true;
@@ -223,8 +207,7 @@ public class ImageCompressUtil {
         options.inSampleSize = inSampleSize;
         bitmap = BitmapFactory.decodeFile(imagePath, options);
         if (bitmap != null) {
-            Log.i("","bitmap.getWidth():" + bitmap.getWidth()
-                    + ",bitmap.getHeight():" + bitmap.getHeight());
+            Log.i("", "bitmap.getWidth():" + bitmap.getWidth() + ",bitmap.getHeight():" + bitmap.getHeight());
         }
         return bitmap;
     }
@@ -235,6 +218,4 @@ public class ImageCompressUtil {
             bitmap = null;
         }
     }
-
-
 }

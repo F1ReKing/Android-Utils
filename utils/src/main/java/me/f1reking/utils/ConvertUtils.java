@@ -15,33 +15,10 @@ import java.io.ByteArrayOutputStream;
  */
 public class ConvertUtils {
 
-    /**
-     * dp 转换成 px
-     *
-     * @param dp
-     * @param context
-     * @return
-     */
-    public static int dp2px(int dp, Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
-    }
 
-    /**
-     * px 转换成 dp
-     *
-     * @param px
-     * @param context
-     * @return
-     */
-    public static float px2dp(float px, Context context) {
-        return px / TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics());
-    }
 
     /**
      * bitmap 转换成 ByteArray
-     *
-     * @param bitmap
-     * @return
      */
     public static byte[] bitmap2ByteArray(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -51,9 +28,6 @@ public class ConvertUtils {
 
     /**
      * byteArray 转换成 Bitmap
-     *
-     * @param byteArray
-     * @return
      */
     public static Bitmap byteArray2Bitmap(byte[] byteArray) {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -61,10 +35,6 @@ public class ConvertUtils {
 
     /**
      * iamgeUri网络图片 转换成 路径
-     *
-     * @param context
-     * @param contentUri
-     * @return
      */
     public static String imageUri2Path(Context context, Uri contentUri) {
         Cursor c = context.getContentResolver().query(contentUri, null, null, null, null);
@@ -73,5 +43,4 @@ public class ConvertUtils {
         c.close();
         return mediaFilePath;
     }
-
 }

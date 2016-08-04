@@ -17,18 +17,13 @@ import java.io.FileOutputStream;
  */
 public class SDCardUtils {
 
-    private SDCardUtils() {
-        throw new Error("Do not need instantiate!");
-    }
-
     /**
      * Check the SD card
      *
      * @return 是否存在SDCard
      */
     public static boolean isSDCardEnable() {
-        return Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED);
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
     /**
@@ -51,13 +46,9 @@ public class SDCardUtils {
 
     /**
      * 获取空闲内存容量
-     *
-     * @param context
-     * @return
      */
     public static int getCacheMaxSize(Context context) {
-        ActivityManager activeManager = ((ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE));
+        ActivityManager activeManager = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE));
         int memClass = activeManager.getMemoryClass();
         return 1024 * 1024 * memClass / 4; // 硬引用缓存容量，为系统可用内存的1/4
     }
@@ -67,12 +58,11 @@ public class SDCardUtils {
      *
      * @param filePath 文件路径
      * @param filename 文件名
-     * @param content  内容
+     * @param content 内容
      * @return 是否保存成功
      * @throws Exception
      */
-    public static boolean saveFileToSDCard(String filePath, String filename,
-                                           String content) throws Exception {
+    public static boolean saveFileToSDCard(String filePath, String filename, String content) throws Exception {
         boolean flag = false;
         if (isSDCardEnable()) {
             File dir = new File(filePath);
@@ -92,8 +82,8 @@ public class SDCardUtils {
      * Read file as stream from SD card
      *
      * @param fileName String PATH =
-     *                 Environment.getExternalStorageDirectory().getAbsolutePath() +
-     *                 "/dirName";
+     * Environment.getExternalStorageDirectory().getAbsolutePath() +
+     * "/dirName";
      * @return Byte数组
      */
     public static byte[] readFileFromSDCard(String filePath, String fileName) {
@@ -118,21 +108,17 @@ public class SDCardUtils {
      *
      * @param filePath 文件路径
      * @param fileName filePath =
-     *                 Environment.getExternalStorageDirectory().getPath()
+     * Environment.getExternalStorageDirectory().getPath()
      * @return 是否删除成功
      */
     public static boolean deleteSDFile(String filePath, String fileName) {
         File file = new File(filePath + "/" + fileName);
-        if (!file.exists() || file.isDirectory())
-            return false;
+        if (!file.exists() || file.isDirectory()) return false;
         return file.delete();
     }
 
     /**
      * 得到路径
-     *
-     * @param context
-     * @return
      */
     public static String getRootPath(Context context) {
         if (context == null) {
@@ -154,15 +140,12 @@ public class SDCardUtils {
 
     /**
      * 文件主目录
-     *
-     * @return
      */
     public static String getMainPath() throws Exception {
         try {
             String path = getSDPath() + "/FingerFinance/";
             File dir = new File(path);
-            if (!dir.exists())
-                dir.mkdirs();
+            if (!dir.exists()) dir.mkdirs();
             return path;
         } catch (Exception e) {
             throw e;
@@ -172,15 +155,13 @@ public class SDCardUtils {
     /**
      * 获取错误日志文件夹
      *
-     * @return
      * @throws Exception
      */
     public static String getErrorPath() throws Exception {
         try {
             String path = getMainPath() + "error/";
             File dir = new File(path);
-            if (!dir.exists())
-                dir.mkdirs();
+            if (!dir.exists()) dir.mkdirs();
             return path;
         } catch (Exception e) {
             throw e;
@@ -189,15 +170,12 @@ public class SDCardUtils {
 
     /**
      * 临时目录
-     *
-     * @return
      */
     public static String getTempPath() throws Exception {
         try {
             String path = getMainPath() + "temp/";
             File dir = new File(path);
-            if (!dir.exists())
-                dir.mkdirs();
+            if (!dir.exists()) dir.mkdirs();
             return path;
         } catch (Exception e) {
             throw e;
@@ -207,7 +185,6 @@ public class SDCardUtils {
     /**
      * 获取临时照片文件路径
      *
-     * @return
      * @throws Exception
      */
     public static String getTempImageFilePath() throws Exception {
@@ -221,15 +198,13 @@ public class SDCardUtils {
     /**
      * 文件上传目录
      *
-     * @return
      * @throws Exception
      */
     public static String getUploadPath() throws Exception {
         try {
             String path = getMainPath() + "upload/";
             File dir = new File(path);
-            if (!dir.exists())
-                dir.mkdirs();
+            if (!dir.exists()) dir.mkdirs();
             return path;
         } catch (Exception e) {
             throw e;
@@ -258,7 +233,6 @@ public class SDCardUtils {
     }
 
     /**
-     * @param filePath
      * @return 删除文件
      */
     public static boolean deleteFile(String filePath) {
@@ -269,7 +243,6 @@ public class SDCardUtils {
     }
 
     /**
-     * @param file
      * @return 删除文件
      */
     public static boolean deleteFile(File file) {
@@ -281,8 +254,6 @@ public class SDCardUtils {
 
     /**
      * 头像文件目录
-     *
-     * @return
      */
     public static String getPersonIconPath() throws Exception {
         try {
@@ -300,8 +271,7 @@ public class SDCardUtils {
     // 取SD卡路径
     public static String getSDPath() throws Exception {
         File sdDir = null;
-        boolean sdCardExist = Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
+        boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
         if (sdCardExist) {
             sdDir = Environment.getExternalStorageDirectory(); // 获取根目录
         }
@@ -325,23 +295,19 @@ public class SDCardUtils {
         StatFs statfs = new StatFs(path.getPath());
         long blockSize = statfs.getBlockSize();
         long availableBlocks = statfs.getAvailableBlocks();
-        if (availableBlocks * blockSize > fileSize)
+        if (availableBlocks * blockSize > fileSize) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
-
 
     /**
      * 得到文件路径
-     *
-     * @param context
-     * @param uri
-     * @return
      */
     public static String getPath(Context context, Uri uri) {
         if ("content".equalsIgnoreCase(uri.getScheme())) {
-            String[] projection = {"_data"};
+            String[] projection = { "_data" };
             Cursor cursor = null;
 
             try {
@@ -359,6 +325,5 @@ public class SDCardUtils {
 
         return null;
     }
-
 }
 

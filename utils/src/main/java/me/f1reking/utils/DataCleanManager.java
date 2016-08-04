@@ -16,8 +16,7 @@ public class DataCleanManager {
     /**
      * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache)
      *
-     * @param context
-     *            上下文
+     * @param context 上下文
      */
     public static void cleanInternalCache(Context context) {
         deleteFolder(context.getCacheDir());
@@ -26,8 +25,7 @@ public class DataCleanManager {
     /**
      * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases)
      *
-     * @param context
-     *            上下文
+     * @param context 上下文
      */
     public static void cleanDatabases(Context context) {
         deleteFolder(new File("/data/data/" + context.getPackageName() + "/databases"));
@@ -36,8 +34,7 @@ public class DataCleanManager {
     /**
      * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs)
      *
-     * @param context
-     *            上下文
+     * @param context 上下文
      */
     public static void cleanSharedPreference(Context context) {
         deleteFolder(new File("/data/data/" + context.getPackageName() + "/shared_prefs"));
@@ -46,10 +43,8 @@ public class DataCleanManager {
     /**
      * 按名字清除本应用数据库
      *
-     * @param context
-     *            上下文
-     * @param dbName
-     *            数据库名称
+     * @param context 上下文
+     * @param dbName 数据库名称
      */
     public static void cleanDatabaseByName(Context context, String dbName) {
         context.deleteDatabase(dbName);
@@ -58,8 +53,7 @@ public class DataCleanManager {
     /**
      * 清除/data/data/com.xxx.xxx/files下的内容
      *
-     * @param context
-     *            上下文
+     * @param context 上下文
      */
     public static void cleanFiles(Context context) {
         deleteFolder(context.getFilesDir());
@@ -68,12 +62,10 @@ public class DataCleanManager {
     /**
      * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache)
      *
-     * @param context
-     *            上下文
+     * @param context 上下文
      */
     public static void cleanExternalCache(Context context) {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             deleteFolder(context.getExternalCacheDir());
         }
     }
@@ -81,8 +73,7 @@ public class DataCleanManager {
     /**
      * 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除
      *
-     * @param filePath
-     *            文件路径
+     * @param filePath 文件路径
      */
     public static void cleanCustomCache(String filePath) {
         deleteFolder(new File(filePath));
@@ -91,10 +82,8 @@ public class DataCleanManager {
     /**
      * 清除本应用所有的数据
      *
-     * @param context
-     *            上下文
-     * @param filePath
-     *            文件路径
+     * @param context 上下文
+     * @param filePath 文件路径
      */
     public static void cleanApplicationData(Context context, String... filePath) {
         cleanInternalCache(context);
@@ -107,8 +96,7 @@ public class DataCleanManager {
         }
     }
 
-    public static void cleanApplicationDataNotDatebase(Context context,
-                                                       String... filePath) {
+    public static void cleanApplicationDataNotDatebase(Context context, String... filePath) {
         cleanInternalCache(context);
         cleanExternalCache(context);
         cleanSharedPreference(context);
@@ -122,8 +110,7 @@ public class DataCleanManager {
      * 删除文件
      */
     public static void deleteFolder(File file) {
-        if (file == null)
-            return;
+        if (file == null) return;
         if (file.isFile() && file.exists()) {
             file.delete();
             return;
@@ -142,8 +129,7 @@ public class DataCleanManager {
     /**
      * 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理
      *
-     * @param directory
-     *            文件夹File对象
+     * @param directory 文件夹File对象
      */
     private static void deleteFilesByDirectory(File directory) {
         if (directory != null && directory.exists() && directory.isDirectory()) {
@@ -182,9 +168,6 @@ public class DataCleanManager {
 
     /**
      * 格式化单位
-     *
-     * @param size
-     * @return
      */
     public static String getFormatSize(double size) {
         double kiloByte = size / 1024;
@@ -195,25 +178,21 @@ public class DataCleanManager {
         double megaByte = kiloByte / 1024;
         if (megaByte < 1) {
             BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
-            return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
-                    .toPlainString() + "KB";
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
         }
 
         double gigaByte = megaByte / 1024;
         if (gigaByte < 1) {
             BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
-            return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
-                    .toPlainString() + "MB";
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB";
         }
 
         double teraBytes = gigaByte / 1024;
         if (teraBytes < 1) {
             BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
-            return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
-                    .toPlainString() + "GB";
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
         }
         BigDecimal result4 = new BigDecimal(teraBytes);
-        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
-                + "TB";
+        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
 }

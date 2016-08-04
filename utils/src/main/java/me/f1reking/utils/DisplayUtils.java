@@ -12,7 +12,6 @@ import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-
 /**
  * 屏幕密度、大小等相关函数类
  * Created by F1ReKing on 2016/1/2.
@@ -21,25 +20,19 @@ public class DisplayUtils {
 
     /**
      * 获取状态栏高度
-     *
-     * @return
      */
     public static int getStatusHeight(Activity activity) {
         int statusHeight = 0;
         Rect localRect = new Rect();
-        activity.getWindow().getDecorView()
-                .getWindowVisibleDisplayFrame(localRect);
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(localRect);
         statusHeight = localRect.top;
         if (0 == statusHeight) {
             Class<?> localClass;
             try {
                 localClass = Class.forName("com.android.internal.R$dimen");
                 Object localObject = localClass.newInstance();
-                int i5 = Integer.parseInt(localClass
-                        .getField("status_bar_height").get(localObject)
-                        .toString());
-                statusHeight = activity.getResources()
-                        .getDimensionPixelSize(i5);
+                int i5 = Integer.parseInt(localClass.getField("status_bar_height").get(localObject).toString());
+                statusHeight = activity.getResources().getDimensionPixelSize(i5);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -61,8 +54,6 @@ public class DisplayUtils {
 
     /**
      * 获取屏幕大小
-     *
-     * @return
      */
     public static Point getDisplayMetrics(Context context) {
         DisplayMetrics dm = new DisplayMetrics();
@@ -74,27 +65,20 @@ public class DisplayUtils {
 
     /**
      * 测量view的宽高
-     *
-     * @param view
      */
     public static void measureView(View view) {
         LayoutParams params = view.getLayoutParams();
         if (params == null) {
-            params = new LayoutParams(LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT);
+            params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         }
         // ��þ�ȷ�Ŀ�ȡ��߶�
-        int widthMeasureSpec = MeasureSpec.makeMeasureSpec(params.width,
-                MeasureSpec.EXACTLY);
-        int heightMeasureSpec = MeasureSpec.makeMeasureSpec(params.height,
-                MeasureSpec.EXACTLY);
+        int widthMeasureSpec = MeasureSpec.makeMeasureSpec(params.width, MeasureSpec.EXACTLY);
+        int heightMeasureSpec = MeasureSpec.makeMeasureSpec(params.height, MeasureSpec.EXACTLY);
         view.measure(widthMeasureSpec, heightMeasureSpec);
     }
 
     /**
      * 测量ListView高度
-     *
-     * @param lv
      */
     public static void measureListViewHeight(ListView lv) {
         ListAdapter adapter = lv.getAdapter();
@@ -105,10 +89,8 @@ public class DisplayUtils {
                 view.measure(0, 0);
                 totalHeight += view.getMeasuredHeight();
             }
-            LayoutParams params = (LayoutParams) lv
-                    .getLayoutParams();
-            params.height = totalHeight
-                    + (lv.getDividerHeight() * (adapter.getCount() - 1));
+            LayoutParams params = (LayoutParams) lv.getLayoutParams();
+            params.height = totalHeight + (lv.getDividerHeight() * (adapter.getCount() - 1));
             lv.setLayoutParams(params);
         }
     }
@@ -146,7 +128,8 @@ public class DisplayUtils {
         }
 
         int totalHeight = 0;
-        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {   //listAdapter.getCount()返回数据项的数目
+        //listAdapter.getCount()返回数据项的数目
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(0, 0);  //计算子项View 的宽高
             totalHeight += listItem.getMeasuredHeight();  //统计所有子项的总高度
@@ -158,5 +141,4 @@ public class DisplayUtils {
         //params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
     }
-
 }

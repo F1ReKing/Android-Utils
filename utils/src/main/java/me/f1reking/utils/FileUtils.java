@@ -23,9 +23,6 @@ public class FileUtils {
 
     /**
      * 获取文件大小
-     *
-     * @param path
-     * @return
      */
     public static long getFileSize(String path) {
         return getFileSize(new File(path));
@@ -33,9 +30,6 @@ public class FileUtils {
 
     /**
      * 获取文件大小
-     *
-     * @param file
-     * @return
      */
     private static long getFileSize(File file) {
         if (file.exists()) {
@@ -54,9 +48,8 @@ public class FileUtils {
     }
 
     /**
-     *  复制文件
-     * @param originalFilePath
-     * @param destFilePath
+     * 复制文件
+     *
      * @throws IOException
      */
     public static void copyFile(String originalFilePath, String destFilePath) throws IOException {
@@ -87,8 +80,7 @@ public class FileUtils {
     }
 
     /**
-     *  删除文件
-     * @param path
+     * 删除文件
      */
     public static void deleteFile(String path) {
         deleteFile(new File(path));
@@ -96,7 +88,7 @@ public class FileUtils {
 
     private static void deleteFile(File file) {
         if (!file.exists()) {
-            Log.e("","The file to be deleted does not exist! File's path is: " + file.getPath());
+            Log.e("", "The file to be deleted does not exist! File's path is: " + file.getPath());
         } else {
             deleteFileRecursively(file);
         }
@@ -110,16 +102,16 @@ public class FileUtils {
                     deleteFileRecursively(item);
                 } else {
                     if (!item.delete()) {
-                        Log.e("","Failed in recursively deleting a file, file's path is: " + item.getPath());
+                        Log.e("", "Failed in recursively deleting a file, file's path is: " + item.getPath());
                     }
                 }
             }
 
             if (!file.delete()) {
-                Log.e("","Failed in recursively deleting a directory, directories' path is: " + file.getPath());
+                Log.e("", "Failed in recursively deleting a directory, directories' path is: " + file.getPath());
             } else {
                 if (!file.delete()) {
-                    Log.e("","Failed in deleting this file, its path is: " + file.getPath());
+                    Log.e("", "Failed in deleting this file, its path is: " + file.getPath());
                 }
             }
         }
@@ -155,9 +147,6 @@ public class FileUtils {
 
     /**
      * 保存图片到文件
-     *
-     * @param fileForSaving
-     * @param bitmap
      */
     public static void saveBitmapToFile(String fileForSaving, Bitmap bitmap) {
         File targetFile = new File(Environment.getExternalStorageDirectory().getPath() + "/" + fileForSaving + ".png");
@@ -180,7 +169,6 @@ public class FileUtils {
         }
     }
 
-
     public static String toCatenatedPath(String... sequentialPathStrs) {
         String catenatedPath = "";
         for (int i = 0; i < sequentialPathStrs.length - 1; i++) {
@@ -191,8 +179,7 @@ public class FileUtils {
     }
 
     /**
-     *  关闭
-     * @param closeables
+     * 关闭
      */
     public static void close(Closeable... closeables) {
         for (Closeable closeable : closeables) {
@@ -205,6 +192,4 @@ public class FileUtils {
             }
         }
     }
-
-
 }
