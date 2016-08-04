@@ -11,6 +11,7 @@ import android.net.wifi.WifiManager;
 import android.os.PowerManager;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -120,5 +121,20 @@ public class PhoneUtils {
                 Pattern.compile("^((13[0-9])|(14[5,7])|(15[0-3,5-8])|(17[0,3,5-8])|(18[0-9])|(147))\\d{8}$");
         }
         return mobilePattern.matcher(mobileNo).matches();
+    }
+
+    /**
+     * 对电话、手机号进行校验
+     */
+    public static boolean isPhoneNum(String phoneNum) {
+        boolean isValid = false;
+        String expression = "(^(010|02\\d|0[3-9]\\d{2})?\\d{6,8}$)";
+        CharSequence inputStr = phoneNum;
+        Pattern pattern = Pattern.compile(expression);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValid = true;
+        }
+        return isValid;
     }
 }

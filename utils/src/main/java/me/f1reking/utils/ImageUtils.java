@@ -10,9 +10,6 @@ import android.graphics.Paint;
 import android.media.ExifInterface;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.animation.Animation;
-import android.view.animation.CycleInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,61 +18,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by F1ReKing on 2016/1/2.
  */
-public class ProjectUtils {
+public class ImageUtils {
 
     private static Context context;
 
-    public ProjectUtils(Context context) {
+    public ImageUtils(Context context) {
         this.context = context;
-    }
-
-    /**
-     * 手机号验证
-     *
-     * @return 验证通过返回true
-     */
-    public static boolean isMobileNum(String mobileNum) {
-
-        Pattern p = null;
-        Matcher m = null;
-        boolean b = false;
-        p = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$"); // 验证手机号
-        m = p.matcher(mobileNum);
-        b = m.matches();
-        return b;
-    }
-
-    /**
-     * 对电话、手机号进行校验
-     */
-    public static boolean isPhoneNumberValid(String phoneNum) {
-        boolean isValid = false;
-        String expression = "((^[1][3,4,5,7,8][0-9]{9}$)|(^(010|02\\d|0[3-9]\\d{2})?\\d{6,8}$))";
-        CharSequence inputStr = phoneNum;
-        Pattern pattern = Pattern.compile(expression);
-        Matcher matcher = pattern.matcher(inputStr);
-        if (matcher.matches()) {
-            isValid = true;
-        }
-        return isValid;
-    }
-
-    /**
-     * 抖动动画
-     *
-     * @author HuangYH
-     */
-    public static Animation shakeAnimation(int CycleTimes) {
-        Animation translateAnimation = new TranslateAnimation(0, 10, 0, 10);
-        translateAnimation.setInterpolator(new CycleInterpolator(CycleTimes));
-        translateAnimation.setDuration(1000);
-        return translateAnimation;
     }
 
     public static File getPhotoDir(Context context) {
@@ -95,7 +47,7 @@ public class ProjectUtils {
     }
 
     // 对一张图片进行宽高比例的压缩
-    public static Bitmap getimage(String srcPath, int scaleWidth, int scaleHeigth, String waterMark) {
+    public static Bitmap getImage(String srcPath, int scaleWidth, int scaleHeigth, String waterMark) {
         try {
             BitmapFactory.Options newOpts = new BitmapFactory.Options();
             // 设置为true时，BitmapFactory.decodeFile(String pathName, Options
@@ -181,7 +133,7 @@ public class ProjectUtils {
         String waterMark, int condense) {
 
         if (srcPath == null || srcPath.length() <= 0) return "";
-        Bitmap image = getimage(srcPath, scaleWidth, scaleHeigth, waterMark);
+        Bitmap image = getImage(srcPath, scaleWidth, scaleHeigth, waterMark);
         if (image == null) return "";
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
